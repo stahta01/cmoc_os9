@@ -47,8 +47,8 @@ error_code _os_seek(path_id path, long position);
 error_code _os_ss_attr(char *pathname, int perm);
 
 /* traditional OS-9 stat calls */
-int getstat(int code, int path, void *p1, void *p2);
-int setstat(int code, int param);
+int getstat(int code, int path, void *p1);
+int setstat(int code, int path, void* param);
 
 void pflinit(void);
 
