@@ -1,7 +1,7 @@
 #include <fcntl.h>
 
 __norts__ asm int
-getstat(int stat, int path, void *p1, void *p2)
+getstat(int stat, int path, void *p1)
 {
     asm
     {
@@ -41,8 +41,24 @@ gsbye   puls    y,u
 	}
 } 
 
+/*
+ * TODO:  this is not a generic setstat function....
+ */
+int setstat(int stat, int path, void* param) 
+{
+    registers_6809 regs;
+    
+    regs.a = path;   
+	regs.b = stat;
+    regs.x = param;
+
+	int syscall = I$SetStt;
+    return _os_syscall(syscall, &regs);
+}
+
+/*
 __norts__ asm int
-setstat(int stat, int param)
+setstat(int stat, int path, void* param )
 {
     asm
     {
@@ -97,3 +113,4 @@ L00a6 	os9 I$SetStt
  		lbra  _sysret 
  	}
 }
+*/
