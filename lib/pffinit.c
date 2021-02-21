@@ -14,7 +14,7 @@ int _abnorm(double *d);
 static int _outdig(double *np, double **conptr);
 extern double scale(double n, int power, int esign);
 extern double ftoatbl[], *ftblend;
-static char buf[30];
+static char pffbuf[30];
 
 int pffinit()
 {
@@ -114,7 +114,7 @@ static char *_ftoa(double *np0, int prec, int format, int c)    /* double to asc
 
        /* now 1.0 <= n < 10.0 , down to business */
 
-choose: p = buf;
+choose: p = pffbuf;
         *p++ = '0';             /* preset for rounding */
         if(sign)
                 *p++ = '-';
@@ -193,7 +193,7 @@ choose: p = buf;
 
 #ifdef DEBUG
      *p='\0';
-     printf("\n buffer is %s\n",buf);
+     printf("\n buffer is %s\n",pffbuf);
 #endif
 
         if(roundflag) {       /* round off */
@@ -241,12 +241,12 @@ choose: p = buf;
         }
 
         *p = '\0';
-        if(p >= &buf[30]) {
+        if(p >= &pffbuf[30]) {
                 fprintf(stderr,"pffinit buffer overflow\n");
                 exit(1);
         }
 
-        return (buf[0] == '0' ? &buf[1] : buf);
+        return (pffbuf[0] == '0' ? &pffbuf[1] : pffbuf);
 }
 
 
