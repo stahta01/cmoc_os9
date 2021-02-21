@@ -1,5 +1,5 @@
 __norts__ asm long
-atol(char *str)
+atoi(char *str)
 {
 	asm
 	{
